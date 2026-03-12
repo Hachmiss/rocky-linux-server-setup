@@ -5,7 +5,7 @@ Después de instalar nuestro sistema operativo (véase [README](../README.md)) l
 ### Levantar la imagen
 Dentro de VibtualBox observaremos una opción que es **crear**, la pulsamos y se nos despliega el siguiente menú:
 <p align="center">
-  <img src="virtualbox_config_crear_maquina.png" width="700">
+  <img src="../images/virtualbox_config_crear_maquina.png" width="700">
 </p>
 Como se puede apreciar en la imagen ya se a seleccionado la imagen, los demás campos se rellenan de manera automática.
 
@@ -26,10 +26,10 @@ Para ello nos dirigimos a la máquina en VirtualBox y vamos a `configuración ->
 En en la pestaña ***Conectado a:*** elegimos la opción ***Adaptador solo anfitrión***. 
 A continuación se muestra una serie de capturas que pueden servir de guía: 
 <p align="center">
-  <img src="images/virtualbox_config_settings.png" width="700">
+  <img src="../images/virtualbox_config_settings.png" width="700">
 </p>
 <p align="center">
-  <img src="images/virtualbox_config_settings2.png" width="700">
+  <img src="../images/virtualbox_config_settings2.png" width="700">
 </p>
 Y con todo esto ya estaríamos listos para arrancar nuestra máquina y conectarnos a el por **SSH**
 En Rocky Linux el servicio **SSHD** suele venir instalado por defecto en la versión minimal utilizada en esta práctica, por lo que normalmente no será necesario configurarlo manualmente en este punto, de todas formas esto se abordará en un futuro en el proyecto, así que si se tiene algún problema pueden ir a la sección de [Firewall & SSHD](Firewall & SSHD).
@@ -76,4 +76,4 @@ ssh usuario@direccion_ip
 Y ya estaremos en al máquina virtual desde nuestra propia máquina.
 
 ---
-Una vez finalizada toda esta configuración se recomienda avanzar con la sección [RAID](RAID).
+Una vez finalizada toda esta configuración se recomienda avanzar con la sección [RAID](RAID.md).
