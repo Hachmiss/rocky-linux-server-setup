@@ -1,4 +1,3 @@
-
 # Instalación de Rocky Linux y configuración de VM
 
 ## SO Rocky
@@ -48,3 +47,6 @@ El orden aproximado de trabajo será:
 4. Configurar almacenamiento (RAID + LVM)  
 5. Configurar seguridad del servidor  
 6. Automatizar configuraciones con Ansible
+
+---
+Para seguir el proyecto en orden se recomienda continuar con [VM](docs/VM).
