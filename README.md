@@ -49,4 +49,4 @@ El orden aproximado de trabajo será:
 6. Automatizar configuraciones con Ansible
 
 ---
-Para seguir el proyecto en orden se recomienda continuar con [VM](./docs/VM).
+Para seguir el proyecto en orden se recomienda continuar con [VM](./docs/VM.md).
