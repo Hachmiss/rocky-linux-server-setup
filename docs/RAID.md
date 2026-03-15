@@ -2,26 +2,21 @@
 
 Redundant Array of Independent/Inexpensive Disks (RAID) es un tecnología que permite agrupar varios dispositivos de almacenamiento (en nuestro caso, discos duros), creando un nuevo dispositivo virtual con capacidades extendidas 
 
+---
 # Tipos de RAID's
 Los niveles de RAID relevantes (en este caso) son: 0, 1 y 5.
-
----
 ## RAID 0 (Stripping)
 **RAID 0**, también llamado **striping**, es una forma de combinar varios discos duros o SSD para que funcionen como si fueran uno solo. Los datos se dividen en partes y se escriben **simultáneamente en varios discos**, lo que permite que la información se lea y se escriba más rápido. Por ejemplo, si tienes dos discos, cada uno guarda una parte del archivo, por lo que el sistema puede trabajar con ambos al mismo tiempo.
 
 La principal **ventaja** de RAID 0 es el **aumento del rendimiento**. Al repartir los datos entre varios discos, las operaciones de lectura y escritura se vuelven mucho más rápidas. Además, permite **aprovechar toda la capacidad de los discos**, es decir, si tienes dos discos de 1 TB tendrás 2 TB totales disponibles. Por eso se usa a veces en sistemas donde la velocidad es muy importante, como en edición de vídeo, juegos o procesamiento de datos.
 
 Sin embargo, su gran **desventaja** es que **no ofrece ninguna seguridad para los datos**. Si uno de los discos falla, se pierde toda la información del sistema RAID porque cada archivo está dividido entre los discos. Esto hace que RAID 0 sea **el menos seguro de todos los niveles de RAID**, por lo que normalmente solo se recomienda cuando se busca rendimiento y se tienen copias de seguridad en otro lugar.
-
----
 ## RAID 1 (Mirror)
 **RAID 1**, también llamado **mirroring**, es un sistema de almacenamiento en el que los datos se **copian exactamente en dos discos al mismo tiempo**. Esto significa que cada archivo que se guarda en un disco también se guarda automáticamente en el otro, creando una copia idéntica. De esta forma, ambos discos contienen la misma información en todo momento.
 
 La principal **ventaja** de RAID 1 es la **seguridad de los datos**. Si uno de los discos falla, el sistema puede seguir funcionando con el otro porque contiene exactamente la misma información. Además, la **lectura puede ser más rápida**, ya que el sistema puede leer datos desde cualquiera de los dos discos.
 
 Sin embargo, su **desventaja principal** es que **solo se aprovecha la mitad de la capacidad total**. Por ejemplo, si tienes dos discos de 1 TB, el sistema solo tendrá 1 TB disponible porque el otro se usa para la copia. También puede ser más costoso, ya que se necesitan más discos para almacenar la misma cantidad de datos.
-
----
 ## RAID 5 (Spare)
 **RAID 5** es un sistema de almacenamiento que combina **varios discos (mínimo tres)** para formar una única unidad lógica. Los datos se dividen entre los discos, pero además se guarda **información de paridad**, que sirve para reconstruir los datos si uno de los discos falla. Esta paridad no se guarda en un único disco, sino que **se distribuye entre todos**, lo que mejora el rendimiento y la seguridad.
 
@@ -30,9 +25,9 @@ La principal **ventaja** de RAID 5 es que ofrece un **equilibrio entre capacidad
 Sin embargo, también tiene **algunas desventajas**. Las **escrituras son más lentas** que en RAID 0 porque el sistema debe calcular y guardar la paridad cada vez que se escriben datos. Además, si **fallan dos discos al mismo tiempo**, se pierde toda la información. Por eso RAID 5 se usa mucho en **servidores y sistemas de almacenamiento**, donde se busca un buen equilibrio entre seguridad y eficiencia del espacio.
 
 ---
-
 # Implementación de RAID
 
+A la hora de implementar RAID's en nuestros servidores, existen 2 maneras diferentes de hacerlo. Con **hardware** y con **software**, veamos las diferencias entre las dos tecnologías a continuación.
 ### Hardware
 
 - Existe un **chipset o controlador RAID dedicado** que se encarga de realizar los cálculos necesarios (por ejemplo, los cálculos de paridad en RAID 5).
@@ -40,7 +35,6 @@ Sin embargo, también tiene **algunas desventajas**. Las **escrituras son más l
 - **Ventaja:** mayor **rendimiento y eficiencia**, ya que el hardware está especializado para esta tarea.
 - **Ventaja:** mayor **fiabilidad y estabilidad** en sistemas críticos.
 - **Desventaja:** **mayor coste**, ya que requiere controladores RAID específicos.
----
 ### Software
 
 - El RAID se implementa mediante un **driver o software del sistema operativo** que gestiona varios discos como si fueran uno solo.
@@ -49,10 +43,11 @@ Sin embargo, también tiene **algunas desventajas**. Las **escrituras son más l
 - **Desventaja:** **menor rendimiento**, porque consume recursos del sistema (CPU y memoria).
 - **Desventaja:** puede ser **menos robusto** que el RAID por hardware en algunos casos.
 
+---
 # Uso en VBox
 
 > [!WARNING]
-> Una vez modificado los RAIDs no se va a poder clonar dicha máquina con los mismo.
+> Una vez modificado los RAIDs no se va a poder clonar la máquina donde se hayan configurado.
 ## Comandos útiles
 Es importante conocer una serie de comandos que listaremos a continuación:
 ### lsblk
@@ -97,7 +92,7 @@ tmpfs                       171M      0  171M   0% /run/user/1000
 Dentro de los diferentes sistemas montados podemos apreciar unos en concreto que  se reconocen por la abreviación `tmps` **(temporal file system)** el cual solo son sistemas temporales que se reinician en cada arranque.
 
 De todos los directorios que observamos el que más nos preocupa en cuanto a **persistencia** para el RAID es el directorio raíz (`/dev/mapper/rlm_vbox-root`) que puede llegar a crecer demasiado.
-### Sistema de archivos Linux
+## Sistema de archivos Linux
 Veamos por encima los **principales archivos del sistema Rocky** que usamos en este proyecto:
 
 ```bash  
@@ -164,14 +159,10 @@ En este comando indicamos:
 - **`--raid-devices=2`** → número de discos que formarán el RAID
 - **`/dev/sdb /dev/sdc`** → discos físicos que se utilizarán para crear el RAID
 
-De esta forma se creará un dispositivo RAID llamado **`/dev/md0`**, que mantendrá una copia idéntica de los datos entre ambos discos.
-El nombre se asigna siguiendo ciertos estándares.
-
 Ahora mediante el siguiente comando podemos visualizar el contenido del fichero `/proc/mdstat`, que contiene información sobre el estado de los dispositivos RAID gestionados por el sistema.
 ```bash  
 more /proc/mdstat
 ```
-
 
 Si queremos observar cómo avanza la creación o sincronización del RAID, podemos utilizar el comando `watch`:
 ```bash
@@ -194,7 +185,19 @@ md0 : active raid1 sdc[1] sdb[0]
 
 unused devices: <none>
 ```
-De esta manera ya tendremos un RAID montado. Pasaremos a continuación a montar un sistema [[LVM]] por encima para poder manejar de forma flexible la memoria de los RAIDs.
+
+Una vez que la barra de progreso termine veremos algo similar a lo siguiente:
+```bash
+Personalities : [raid1]
+md0 : active raid1 sdc[1] sdb[0]
+      20954112 blocks super 1.2 [2/2] [UU]
+
+unused devices: <none>
+```
+De esta forma se creará un dispositivo RAID llamado **`/dev/md0`**, que mantendrá una copia idéntica de los datos entre ambos discos.
+El nombre se asigna siguiendo ciertos estándares.
+
+Ya tendremos un RAID montado. Pasaremos a continuación a montar un sistema [LVM](LVM.md) por encima para poder manejar de forma flexible la memoria de los RAIDs.
 
 De esta forma combinamos ambas tecnologías para construir un sistema de almacenamiento **más robusto y adaptable**.
 

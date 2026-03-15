@@ -15,6 +15,8 @@ Una vez levantado solamente hace falta seguir las indicaciones de la interfaz de
 
 > [!TIP] 
 > Se recomienda que no se cree un usuario root, y que solo se cree un usuario con privilegios de administrador. Esto se hace por cuestiones de seguridad.
+
+---
 # Configuración de las interfaces de red
 Ahora con el objetivo de poder **conectarnos al servidor desde la terminal de nuestra máquina** usando **SSH**, lo cual hará que trabajar con el servidor sea más cómodo, configuraremos las **interfaces de red** desde VirtualBox, veamos como:
 
