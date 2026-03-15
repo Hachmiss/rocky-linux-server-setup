@@ -356,4 +356,3 @@ sudo systemctl daemon-reload
 > [!WARNING]  
 > No se debe escribir directamente sobre los **discos físicos que forman parte del RAID** (por ejemplo `/dev/sdb` o `/dev/sdc`).  
 > Hacerlo podría **corromper el arreglo RAID**, ya que se modificaría el contenido de uno de los discos sin pasar por el controlador RAID.
-systemctl daemon-reload
