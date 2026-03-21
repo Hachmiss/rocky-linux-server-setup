@@ -33,6 +33,7 @@ A continuación se muestra una serie de capturas que pueden servir de guía:
 <p align="center">
   <img src="../images/virtualbox_config_settings2.png" width="700">
 </p>
+
 Y con todo esto ya estaríamos listos para arrancar nuestra máquina y conectarnos a el por **SSH**
 En Rocky Linux el servicio **SSHD** suele venir instalado por defecto en la versión minimal utilizada en esta práctica, por lo que normalmente no será necesario configurarlo manualmente en este punto, de todas formas esto se abordará en un futuro en el proyecto, así que si se tiene algún problema pueden ir a la sección de [Firewall & SSHD](Firewall & SSHD).
 
