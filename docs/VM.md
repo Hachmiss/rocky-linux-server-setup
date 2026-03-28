@@ -36,7 +36,64 @@ A continuación se muestra una serie de capturas que pueden servir de guía:
 
 Y con todo esto ya estaríamos listos para arrancar nuestra máquina y conectarnos a el por **SSH**
 
-En Rocky Linux el servicio **SSHD** suele venir instalado por defecto en la versión minimal utilizada en este proyecto, por lo que normalmente no será necesario configurarlo manualmente en este punto, de todas formas esto se abordará en un futuro en el proyecto, así que si se tiene algún problema pueden ir a la sección de [Firewall & SSHD](Firewall_&_SSHD).
+En Rocky Linux el servicio **SSHD** suele venir instalado por defecto en la versión minimal utilizada en este proyecto, por lo que normalmente no será necesario configurarlo manualmente en este punto, de todas formas esto se abordará en un futuro en el proyecto, así que si se tiene algún problema pueden ir a la sección de [Firewall & SSHD](FIREWALL_&_SSHD.md).
+
+Para evitar que se modifique la ip de la máquina es conveniente realizar los siguientes pasos, aunque esto no es estrictamente necesario para el funcionamiento del sistema, es necesario si queremos hacer automatizaciones y para tener identificado al servidor:
+
+Podemos ver las conexiones disponibles en este momento. Para facilitar su identificación, se modifica el nombre de la conexión utilizando el siguiente comando:  
+
+```bash
+nmcli c modify "Nombre-antiguo" connection.id "Nombre-nuevo"
+```
+
+Una vez renombrada la conexión, se procede a listar todas las conexiones configuradas en el sistema:  
+
+```bash
+nmcli c show
+```
+  
+A continuación, se configura una dirección IP estática, deshabilitando el uso de DHCP. Para ello se modifican los parámetros `method` y `addresses`:  
+
+> [!NOTE]
+> Puede que no se conozca el protocolo DHCP pero no hay problema con ello, es suficiente con saber que es el protocolo responsable de la asignación dinámica de direcciones IP.
+
+```bash
+nmcli connection modify <NOMBRE> ipv4.method manual  
+nmcli connection modify <NOMBRE> ipv4.addresses 192.168.X.X/24
+```
+
+donde `<NOMBRE>` corresponde al identificador de la conexión.
+Finalmente, se verifica que los cambios se han aplicado correctamente accediendo al modo de edición de la conexión y mostrando su configuración:  
+
+```bash
+[hachmiss ~]$ nmcli c edit <NOMBRE>
+
+===| Editor de conexión interactivo de nmcli |===
+
+Modificando la conexión «****» existente: «****»
+
+Escriba «help» o «?» para comandos disponibles.
+Escriba «print» para mostrar todas las propiedades de conexión.
+Escriba «describe [<parámetro>.<prop>]» para una descripción de propiedad detallada.
+
+Puede modificar los siguientes parámetros:****
+nmcli> print
+....
+```
+
+Y solo nos interesará comprobar que los cambios se han realizado de manera correcta:
+
+```bash
+ipv4.method:                            manual
+ipv4.dns:                               --
+ipv4.dns-search:                        --
+ipv4.dns-options:                       --
+ipv4.dns-priority:                      0
+ipv4.addresses:                         192.168.X.X/24
+```
+
+> [!TIP]
+> También se puede usar el modo con interfaz que puede ser más amigable mediante el comando `nmtui`
 
 ### Conectarse mediante SSH
 De manera rápida podemos conectarnos ,teniendo nuestra **máquina encendida**, usando **SSH**, veamos de manera simple como conectarnos.
