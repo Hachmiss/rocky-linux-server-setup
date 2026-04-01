@@ -355,5 +355,5 @@ ssh -p <PUERTO> usuario@servidor
 > Esto resulta especialmente útil para verificar si servicios como SSH o HTTP están accesibles desde la red.
 
 ---
-Si todo ha salido bien hasta el momento podemos pasar a la siguiente sección que será [ANSIBLE](ANSIBLE.md) para abordar la automatización.
+Si todo ha salido bien hasta el momento podemos pasar a la siguiente sección que será [ANSIBLE.bak](ANSIBLE.bak.md) para abordar la automatización.
 

@@ -1,4 +1,5 @@
 # Discos y particiones
+
 Cuando un sistema dispone de varios dispositivos de almacenamiento, estos se identifican siguiendo una **convención de nombres estándar** en sistemas basados en Linux. 
 
 Los discos se enumeran de forma secuencial mediante letras, comenzando normalmente por **sda**, seguido de **sdb**, **sdc**, **sdd**, y así sucesivamente. Cada uno de estos identificadores representa un **dispositivo físico de almacenamiento** conectado al sistema.

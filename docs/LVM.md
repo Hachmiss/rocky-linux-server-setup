@@ -1,4 +1,5 @@
 # Definición 
+
 Aunque siempre existe la posibilidad de trabajar a nivel de particiones en linux, esto es muy poco flexible. Por eso optamos por la tecnología **LVM**.
 **Logical Volume Manager (LVM)** es una tecnología que se utiliza en los sistemas Linux que **facilita la gestión de los volúmenes** de almacenamiento. Al contrario que en el caso de las particiones, este nos permite hacer crecer las volúmenes lógicos, por lo que es más versátil
 

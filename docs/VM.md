@@ -1,4 +1,5 @@
 # Creación de la VM
+
 En esta sección veremos como levantar el sistema operativo Rocky en una máquina virtual. En esta sección se podrán ver capturas de pantalla de VirtualBox por lo que puede que no coincidan con el sistema de virtualización del usuario.
 ## Primeros pasos
 Después de instalar nuestro sistema operativo (véase [README](../README.md)) lo siguiente que haremos será levantar la imagen en VirtualBox, esto es sencillo. 
